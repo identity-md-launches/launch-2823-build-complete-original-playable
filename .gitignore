@@ -1,0 +1,11 @@
+# Path budget: this file <= 1024 bytes. Generated dependencies/caches: 0 submitted bytes.
+**/node_modules/
+**/.vite/
+**/.cache/
+**/.npm/
+**/*.tsbuildinfo
+test/scratch/
+**/.playwright-mcp/
+**/playwright-report/
+**/test-results/
+# dist/ is a required, delivered static export. Do not ignore it.

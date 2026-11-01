@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "installationId": "stream-game-sepolia-test-20261025-01",
+  "status": "available",
+  "chain": {
+    "target": "sepolia",
+    "chainId": "11155111",
+    "confirmations": "12",
+    "deploymentBlock": "11998937",
+    "indexedThroughBlock": "12041074",
+    "safeThroughBlock": "12041063"
+  },
+  "identities": {
+    "factory": "0xbeaea1b81a7e9f2dc49901602fdb4d6bb260813f",
+    "core": "0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44",
+    "proxyAdmin": "0x4a8ea91a43eeecb8cffc73631627a7d6f973fdbf",
+    "proxyAdminOwner": "0xa68a2fa1ffcff79a8e143f05ddcdc48fbaeaafcb",
+    "operatorTimelock": "0xa68a2fa1ffcff79a8e143f05ddcdc48fbaeaafcb",
+    "operatorProposer": "0x8342a3f35fdd8d2696005b2d101374f9eb10daf7",
+    "proxyImplementation": "0x284747c4664af2203e7a90a2ee76f22b6b5e6889",
+    "proxyAdminSlot": "0x4a8ea91a43eeecb8cffc73631627a7d6f973fdbf"
+  },
+  "core": {
+    "cumulativeWork": "67023",
+    "cumulativeBlockUnits": "5973689426642",
+    "blockHeight": "5973",
+    "blockProgress": "689426642",
+    "workPerThousandBlocks": "10958",
+    "settledThroughRound": "856",
+    "authorizationNonce": "814",
+    "paused": false
+  },
+  "source": {
+    "eventName": "BatchSettled",
+    "blockNumber": "12041016",
+    "blockHash": "0xecf9308e081975a3a8c4233278e7848dd981a9700857719f88dd23f9c9e600df",
+    "blockTimestamp": "1793536236",
+    "transactionHash": "0xa9995b6566a1ee8c4994979df5d314417300516031d928358dd875dd52a40e3e",
+    "transactionIndex": "71",
+    "logIndex": "203"
+  },
+  "events": [
+    {
+      "id": "179353623600000000111551110000000012041016000000000000007150000000000000203",
+      "contractKind": "core",
+      "contractAddress": "0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44",
+      "eventName": "BatchSettled",
+      "blockNumber": "12041016",
+      "blockHash": "0xecf9308e081975a3a8c4233278e7848dd981a9700857719f88dd23f9c9e600df",
+      "blockTimestamp": "1793536236",
+      "transactionHash": "0xa9995b6566a1ee8c4994979df5d314417300516031d928358dd875dd52a40e3e",
+      "transactionIndex": "71",
+      "logIndex": "203",
+      "arguments": [
+        {
+          "name": "digest",
+          "value": "0x069c4dc47aa44095bac1bef0bbbdda2c0e093cdc8af129b4a1af41f4ed82e32a"
+        },
+        {
+          "name": "reporter",
+          "value": "0xb317ab7cc24fd5d94ea120b3b189bc6527a7d0aa"
+        },
+        {
+          "name": "settledThroughRound",
+          "value": "856"
+        },
+        {
+          "name": "nonce",
+          "value": "813"
+        },
+        {
+          "name": "previousSettledThroughRound",
+          "value": "855"
+        },
+        {
+          "name": "activeRoundCount",
+          "value": "0"
+        },
+        {
+          "name": "cumulativeWork",
+          "value": "67023"
+        },
+        {
+          "name": "cumulativeBlockUnits",
+          "value": "5973689426642"
+        }
+      ]
+    }
+  ]
+}
