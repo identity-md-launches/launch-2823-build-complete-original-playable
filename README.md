@@ -40,17 +40,17 @@ There is no backend, private credential, `.env` requirement, wallet dependency, 
 | Sunpine | Dry soil, away from ponds and willows | Shades all eight neighbors |
 | Glowcap | Soil with both water and shade | Wakes spirits on its own tile and all eight neighbors |
 
-You have two of each seed and at most six valid plantings. Ponds provide natural water; old trees provide shade. Invalid moves cost nothing. Full instructions, keyboard controls and scoring are in the in-game **Field guide** and [game instructions](artifacts/GAME_GUIDE.md).
+You have two of each seed and at most six valid plantings. Ponds provide natural water; old trees provide shade. Invalid moves cost nothing. Full instructions, keyboard controls and scoring are in the in-game **Field guide** and [game instructions](docs/GAME_GUIDE.md).
 
 ## Live data and forest memory
 
 `GET https://api.squeekchain.com/v1/core` is the sole data source. The app validates the supported schema, network, numeric bounds, settlement hashes, safe frontier and block-unit arithmetic before using a height. Verification means validation of the documented public API, not an independent Ethereum proof. Connection badges say **LIVE**, **STALE**, or **OFFLINE**. A fixed-seed puzzle always says **PRACTICE**, even if the connection is live.
 
-The first reading unlocks the current 60-block milestone. A later observed confirmed milestone unlocks another puzzle. Each unlock retains its first height/hash evidence; later refreshes cannot change it. Previously unlocked puzzles remain replayable in the Grove journal. Missed milestones and missing historical measurements are never invented.
+The first reading unlocks the current 60-block milestone. A later observed confirmed milestone unlocks another puzzle. A milestone's grove is generated only from the milestone number and the deployment identity, so every visitor gets the same board for the same milestone. The height and hashes that unlocked it are kept as a record, not as puzzle input. Every layout is solved before it is offered. Previously unlocked puzzles remain replayable in the Grove journal. Missed milestones and missing historical measurements are never invented.
 
-One additional visual growth tree appears every **60 settled Squeek blocks**; a new grove begins every **1,200**. Forest memory compares the last locally recorded observation from the previous page visit with the current observation, only within the same deployment and a non-regressing frontier. The latest 100 verified snapshots are kept; the latest 20 are displayed and all retained snapshots can be exported as JSON. Puzzle anchors and best scores are retained separately. Practice creates no verified snapshots or blockchain unlocks.
+One additional visual growth tree appears every **60 settled Squeek blocks**; a new grove begins every **1,200**. Forest memory compares the last locally recorded observation from the previous page visit with the current observation, only within the same deployment and a non-regressing frontier. One snapshot is recorded per page load and the 30-second poll updates it in place, so a long-open tab never pushes out earlier visits. Up to 100 visits are kept; the latest 20 are displayed and all retained snapshots can be exported as JSON. Puzzle anchors and best scores are retained separately. Practice creates no verified snapshots or blockchain unlocks.
 
-See [data sources and verification](artifacts/DATA_SOURCES.md) for the complete rules and trust limits.
+See [data sources and verification](docs/DATA_SOURCES.md) for the complete rules and trust limits.
 
 ## Check the implementation
 
@@ -65,7 +65,7 @@ npm run check:export
 
 Playwright also needs its platform's browser system libraries. A Chromium-only run is available with `SEEDKEEPER_BROWSER=chromium npm run test:browser`. The script serves the production export beneath `/preview/`, validates real interactions, and writes temporary results to `test/scratch/browser-validation/`. Those scratch files are not part of the submitted source.
 
-Actual build, test and review outcomes are recorded in [validation](artifacts/validation.md), with preserved machine-readable results and selected screenshots. Tests use a captured API fixture, clearly isolated under `test/fixtures/`; fixture mutations never enter the runtime bundle. The live endpoint was also checked separately in the browser.
+Actual build, test, browser and design-review results, and the checks that did not run, are recorded in [docs/VALIDATION.md](docs/VALIDATION.md). Tests use a captured API fixture, clearly isolated under `test/fixtures/`; fixture mutations never enter the runtime bundle. The live endpoint was also checked separately in the browser.
 
 The optional pinned design probe can be rerun where its assignment input is present:
 
@@ -73,7 +73,7 @@ The optional pinned design probe can be rerun where its assignment input is pres
 node .imd/reads/skills/design-critic/scripts/taste.mjs --out test/scratch/taste
 ```
 
-That input is removed after the assignment. Its actual results are preserved in `artifacts/design-probe.json`. [DESIGN.md](DESIGN.md) documents the final tokens and components without requiring the input guides.
+That input is removed after the assignment. Its recorded results are in [docs/VALIDATION.md](docs/VALIDATION.md). [DESIGN.md](DESIGN.md) documents the final tokens and components without requiring the input guides.
 
 ## Source map
 
@@ -85,11 +85,12 @@ That input is removed after the assignment. Its actual results are preserved in 
 - `src/styles.css`: responsive design tokens, game states and accessibility treatments.
 - `vite.config.ts`: relative static export and content-versioned offline shell generation.
 - `test/` and `scripts/`: reproducible engine, data, persistence, export and browser validation.
+- `docs/`: game guide, data-source rules and the validation record.
 
 ## Delivery status
 
-The implementation, source, lockfile and production export are prepared for the assignment's Git submission bundle. A hosted site alone would not fulfill this brief. **A new public source repository, linked pull request and final IMD site URL have not been produced or verified in this session.** No repository publishing connector or GitHub CLI is available. The job's post-submission publishing step can serve the delivered export, but this README does not claim that publication already happened. [Delivery record](artifacts/DELIVERY.md) and [ready PR description](artifacts/PULL_REQUEST.md) make that remaining work explicit.
+The implementation, source, lockfile and production export are prepared for the assignment's Git submission bundle. A hosted site alone would not fulfill this brief. **A new public source repository, linked pull request and final IMD site URL have not been produced or verified in this session.** No repository publishing connector or GitHub CLI is available. The job's post-submission publishing step can serve the delivered export, but this README does not claim that publication already happened.
 
 ## Rights and attribution
 
-The new implementation is licensed under [MIT](LICENSE). This does not relicense the original SQUEEKFOREST. Silkscreen is under the SIL Open Font License. See [third-party notices](artifacts/THIRD_PARTY.md).
+The new implementation is licensed under [MIT](LICENSE). This does not relicense the original SQUEEKFOREST. Silkscreen (via `@fontsource/silkscreen`) is under the SIL Open Font License; its license ships at `public/licenses/silkscreen-OFL.txt`. React and the build tools keep their own licenses in their packages.

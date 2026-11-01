@@ -27,7 +27,7 @@ Canonical semantic tokens are in `src/styles.css:1`.
 
 Board art uses its own small environment palette: soil `#2a472d` / `#2d4a30`, board surround `#15271d`, boundary `#4b6749`, pond `#234c4e`, and illuminated soil `#475c31`. Water/shade markers use `#b7e3e0` / `#e0d6b8`. These are art/environment categories rather than additional call-to-action colors.
 
-The canvas veil is `#0b1716cc` (80% opacity) through 65% of the scene, fading into the solid page background. It prevents bright firefly pixels from competing with text. The rendered static background sampling result is in `artifacts/contrast-results.json`; it is limited to the measured reduced-motion frame, not every possible animation frame. The automated probe's solid-background contrast checks pass, with its image/canvas exclusions documented in validation.
+The canvas veil is `#0b1716cc` (80% opacity) through 65% of the scene, fading into the solid page background. It prevents bright firefly pixels from competing with text. The automated probe's contrast check passes for all measured text (see [`docs/VALIDATION.md`](docs/VALIDATION.md)). It measures against solid backgrounds, not every animated canvas frame.
 
 ## Typography
 
@@ -77,6 +77,7 @@ Do not soften the board into large rounded cards. Keep selection/focus visible a
 | `.seed-option` | `src/App.tsx:173` | Three native choices with `aria-pressed`, sprite, stock count and selected border; available on all widths |
 | `.board-actions` | `src/App.tsx:169` | Undo, restart and mobile hint; unavailable undo/restart are disabled; best scores survive reset |
 | `.game-message` | `src/App.tsx` | Persistent polite status area; instructions, invalid placement, exhaustion and victory with a point breakdown |
+| `.message-actions` | `src/App.tsx`, `src/styles.css` | Win actions. Practice: one filled "Play another grove". Verified: filled "Open next verified grove" when the journal holds an unplayed grove, plus an outlined "Try a practice grove" that names the switch to practice. Inline and right-aligned on wide screens; full-width stacked buttons, 8px apart, at 760px and below |
 | `.status` / `.data-bar` | `src/App.tsx` | Text plus square marker for LIVE/STALE/OFFLINE/PRACTICE; manual refresh, timestamps and expandable full evidence; stable error live region |
 | `.tabs` | `src/App.tsx` | Single-page view buttons with active underline and `aria-current`; no server routing required |
 | `.visit-note` / snapshot table | `src/App.tsx:185` | Exact observed deltas or a first-visit/incomparable explanation; JSON download |
@@ -93,4 +94,4 @@ Every ordinary button targets 44px minimum height. Dense data controls/checkboxe
 - Preserve separate practice/verified provenance and local-score language in every new state. Never add fictitious historical growth or shared scores.
 - Do not add a font, unrelated accent, gradient text, hidden hash truncation or animation required to understand an outcome.
 
-The six-domain review, findings, fixes and unperformed checks are recorded in `artifacts/validation.md`. This document describes the final implementation, not proposed future styling.
+The six-domain review, findings, fixes and unperformed checks are recorded in [`docs/VALIDATION.md`](docs/VALIDATION.md). This document describes the final implementation, not proposed future styling.

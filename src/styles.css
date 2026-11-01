@@ -159,7 +159,8 @@ input[type='checkbox'] { width: 15px; height: 15px; accent-color: var(--accent);
 .game-message.success { background: #243a28; }
 .game-message.success strong { color: var(--accent); }
 .game-message.warning strong { color: var(--warning); }
-.game-message>button { align-self: center; font-size: var(--size-small); }
+.game-message>.message-actions { flex: 0 1 auto; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; align-self: center; }
+.game-message .message-actions button { font-size: var(--size-small); }
 .score-breakdown { max-width: 65ch; }
 .practice-note { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; column-gap: 16px; row-gap: 4px; font-size: var(--size-small); color: var(--muted); padding: 14px 0 0; }
 .practice-note>span { flex: 1; min-width: 200px; }
@@ -300,7 +301,8 @@ dialog::backdrop { background: #050c0ce0; }
   .game-message { margin-block-start: 18px; padding: 16px; gap: 12px; min-height: 0; flex-wrap: wrap; }
   .game-message>.pixel { width: 24px; height: 24px; }
   .game-message>div { min-width: 0; }
-  .game-message>button { width: 100%; }
+  .game-message>.message-actions { flex: 1 1 100%; flex-direction: column; }
+  .game-message .message-actions button { width: 100%; }
   .practice-note { padding-block-start: 10px; }
   .data-bar { margin-block-start: 24px; padding-block: 16px; }
   .connection-line { gap: 10px; align-items: flex-start; }

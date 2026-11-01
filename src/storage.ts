@@ -31,18 +31,24 @@ export function saveMemory(memory: Memory, storage: Pick<Storage, 'setItem'> = l
   try { storage.setItem(STORAGE_KEY, JSON.stringify(memory)); return null; }
   catch { return 'This browser could not save progress. Keep this tab open to continue this session.'; }
 }
-export function recordSnapshot(memory: Memory, snapshot: Snapshot): Memory {
+/**
+ * Records one verified observation. Pass replaceLast after this page load has already recorded one,
+ * so polling updates the current visit in place instead of pushing earlier visits out of memory.
+ */
+export function recordSnapshot(memory: Memory, snapshot: Snapshot, replaceLast = false): Memory {
   const last = memory.snapshots.at(-1);
   if (last && comparable(last, snapshot) && (snapshot.height < last.height || snapshot.safeBlock < last.safeBlock)) return memory;
   const milestone = Math.floor(snapshot.height / 60) * 60;
   const id = `verified-v1:${deploymentKey(snapshot)}:${milestone}`;
-  // Every observed milestone is anchored once. Never invent a measurement for missed milestones.
+  // Every observed milestone is unlocked once; its evidence records when, not what the puzzle is.
+  // Never invent a measurement for missed milestones.
   const archive = memory.archive.some(e => e.id === id) ? memory.archive : [...memory.archive, { milestone, evidence: snapshot, id }];
-  const snapshots = [...memory.snapshots, snapshot].slice(-100);
+  const snapshots = replaceLast && memory.snapshots.length ? [...memory.snapshots.slice(0, -1), snapshot] : [...memory.snapshots, snapshot].slice(-100);
   return { ...memory, snapshots, archive };
 }
 export function archivedPuzzle(entry: ArchiveEntry): Puzzle {
-  return makePuzzle('verified', entry.milestone, `${entry.evidence.height}|${entry.evidence.blockHash}|${entry.evidence.transactionHash}`, entry.id);
+  // Seeded only by values every visitor shares for this milestone, so one milestone is one grid.
+  return makePuzzle('verified', entry.milestone, deploymentKey(entry.evidence), entry.id);
 }
 export function validPlants(puzzle: Puzzle, plants: Plant[]): Plant[] {
   const accepted: Plant[] = [];
